@@ -14,11 +14,13 @@
                 <i class="el-icon-arrow-down"></i>
               </div></el-col>
               <el-col :span="18"><div class="grid-content bg-purple">
-                  <el-input
-                    placeholder="请输入商品信息"
-                    >
-                    <i slot="prefix" class="el-input__icon el-icon-search"></i>
-                  </el-input>
+                  <router-link to="/assortment/">
+                    <el-input
+                      placeholder="请输入商品信息"
+                      >
+                      <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                    </el-input>
+                  </router-link>
               </div></el-col>
             </el-row>
            </el-header>
@@ -247,6 +249,9 @@
             }
           },
           methods:{
+            input:function(){
+              window.location.href = '/#/assortment/';
+            },
             addshop:function(v){
               alert("添加购物车成功")
                 if(!localStorage.getItem('id')){

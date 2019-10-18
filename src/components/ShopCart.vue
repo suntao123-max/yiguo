@@ -20,9 +20,9 @@
 				</div>
 				<i class="del" @click="del(v)"></i>
 				<div class="pro">
-					<input type="button" value="-">
+					<input type="button" @click="reduce(v)" value="-">
 					{{v.proNum}}
-					<input type="button" value="+">
+					<input type="button" @click="plus(v)" value="+">
 				</div>
 				
 			</li>
@@ -61,7 +61,7 @@
 			item:function(v){
 				if(v==""){
 					this.chkAll=true
-					this.pitchOn=false
+					this.pitchOn = false
 				}else{
 					this.chkAll=false
 					this.pitchOn=true
@@ -74,7 +74,7 @@
 				for(var j = item.length-1 ; j > i ; j--){
 					if(item[i].id==item[j].id){
 						item.splice(j,1)
-						item[i].proNum++
+						item[i].proNum +=1
 					}
 				}
 			}
@@ -86,19 +86,35 @@
 			}
 		},
 		updated:function(){
+			var array = []
+			for(let j in this.item){
+				array.push(this.item[j].isCheck)
+			}
+			if(array.indexOf(false,0) == '-1'){
+				this.pitchOn = true
+			}else{
+				this.pitchOn = false
+			}
 			let arr = this.arr,num = 0;
 			for(let k in arr){
-				num += parseFloat(arr[k].price.slice(5,))
+				num += parseFloat(arr[k].price.slice(5,)*arr[k].proNum)
 			}
 			if(num>=100){
 				this.postal="0.00"
 			}else{
 				this.postal = (100 - num).toFixed(2)
-
 			}
 			this.count = num.toFixed(2);
 		},
 		methods:{
+			reduce:function(v){
+				if(v.proNum>1){
+					v.proNum -=1
+				}
+			},
+			plus:function(v){
+				v.proNum +=1
+			},
 			chk:function(v,i){
 				v.isCheck=!v.isCheck
 				if(v.isCheck==true){
@@ -125,7 +141,64 @@
 				}
 			},
 			checkAll:function(){
-				
+				this.arr = [];
+				if(this.pitchOn==true){
+					this.pitchOn=false;
+					let item = this.item
+					for(let index in item){
+						item[index].isCheck=this.pitchOn;
+						if(item[index].isCheck==true){
+							this.arr.push(item[index])
+							let arr = this.arr;
+							let  num = 0;
+							for(let k in arr){
+								num += parseFloat(arr[k].price.slice(5,))
+							}
+							this.count = num.toFixed(2);
+						}else{
+							let arr = this.arr
+							for(let i in arr){
+								if(item[index]==arr[i]){
+								let arr2 = arr.slice(i, i+1)
+									arr.splice(i,1)
+									let num = 0;
+									for(let n in arr){
+										num += parseFloat(arr[n].price.slice(5,));
+									}
+									this.count = num.toFixed(2);
+								}
+							}
+						}
+					}
+				}else{
+					this.pitchOn=true;
+					let item = this.item
+					for(let index in item){
+						item[index].isCheck=this.pitchOn;
+						if(item[index].isCheck==true){
+							this.arr.push(item[index])
+							let arr = this.arr;
+							let  num = 0;
+							for(let k in arr){
+								num += parseFloat(arr[k].price.slice(5,))
+							}
+							this.count = num.toFixed(2);
+						}else{
+							let arr = this.arr
+							for(let i in arr){
+								if(item[index]==arr[i]){
+								let arr2 = arr.slice(i, i+1)
+									arr.splice(i,1)
+									let num = 0;
+									for(let n in arr){
+										num += parseFloat(arr[n].price.slice(5,));
+									}
+									this.count = num.toFixed(2);
+								}
+							}
+						}
+					}
+				}
 			},
 			del:function(v){
 				let r = confirm("你确定删除吗？")
