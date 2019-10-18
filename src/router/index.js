@@ -17,6 +17,11 @@ export default new Router({
       component: HelloWorld
     },
     {
+      path:"/address",
+      name:'Address',
+      component:loadView('HelloWorld/Address')
+    },
+    {
       path: '/assortment',
       name: 'Assortment',
       component: loadView('Assortment'),

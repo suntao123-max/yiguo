@@ -9,7 +9,7 @@
            <el-header>
             <el-row :gutter="24">
               <el-col :span="6">
-                <div class="grid-content bg-purple">
+                <div @click="address" class="grid-content bg-purple">
                     北京
                 <i class="el-icon-arrow-down"></i>
               </div></el-col>
@@ -249,11 +249,14 @@
             }
           },
           methods:{
+            address:function(){
+                window.location.href = '/#/address/'
+            },
             input:function(){
               window.location.href = '/#/assortment/';
             },
             addshop:function(v){
-              alert("添加购物车成功")
+              this.$message("添加购物车成功")
                 if(!localStorage.getItem('id')){
                     let arr = []
                     arr.push(v)

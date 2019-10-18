@@ -8,8 +8,10 @@
 			<div class="post">全场满一百包邮，还差<span v-text="postal"></span>元包邮</div>
 		</div>
 		<ul class="car">
-			<li v-if='item==""'>
+			<li class="img" v-if='item==""'>
 				<img src="/static/images/shopCart/img_nogoods@3x.png" alt="">
+				<div>购物车空空如也，快去逛逛吧</div>
+				<router-link to="/"><button type="button">去逛逛</button></router-link>
 			</li>
 			<li class="content" v-for="(v,i) in item" :key="i">
 				<input type="checkbox" class="chk" :checked="v.isCheck" @click="chk(v,i)">
@@ -63,8 +65,8 @@
 					this.chkAll=true
 					this.pitchOn = false
 				}else{
-					this.chkAll=false
 					this.pitchOn=true
+					this.chkAll=false
 				}
 			}
 		},
@@ -79,6 +81,7 @@
 				}
 			}
 			this.item = item
+			localStorage.setItem('id',JSON.stringify(item))
 			for(var i in item){
 				if(item[i].isCheck){
 					this.arr.push(item[i])
@@ -90,10 +93,12 @@
 			for(let j in this.item){
 				array.push(this.item[j].isCheck)
 			}
-			if(array.indexOf(false,0) == '-1'){
-				this.pitchOn = true
-			}else{
-				this.pitchOn = false
+			if(array){
+				if(array.indexOf(false,0) == '-1'){
+					this.pitchOn = true
+				}else{
+					this.pitchOn = false
+				}
 			}
 			let arr = this.arr,num = 0;
 			for(let k in arr){
@@ -244,8 +249,14 @@
 				display:flex;
 				align-items:space-around;
 				position:relative;
+				margin:.5rem 1rem;
+				padding:0 1rem;
 				.chk,img{
 					align-self:center;
+					transform:scale(.7)
+				}
+				.chk{
+					transform:scale(1)
 				}
 				.del{
 					display:inline-block;
@@ -295,12 +306,28 @@
 					margin:0 10px;
 				}
 			}
-			li{
-				margin:10px;
+			.img{
+				text-align:center;
+				position:absolute;
+				top:40%;
+				left:50%;
+				transform:translate(-50%,-50%);
 				img{
-					width:100%;
-					height:100%;
-					transform:scale(.7)
+					transform:scale(.7);
+				}
+				div{
+					margin-top:1rem;
+					color:gray;
+				}
+				button{
+					font-size:1.5rem;
+					margin-top:1rem;
+					width:10rem;
+					height:3.2rem;
+					background-color:#fff;
+					border:1px solid #11b57c;
+					border-radius:.5rem;
+					color:currentColor;
 				}
 			}
 		}
