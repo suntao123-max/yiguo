@@ -23,7 +23,7 @@
          </label>
       </div>
       <div class="submit">
-          <input type="button" @click="submit" value="立即注册" :disabled="!checked" />
+          <input type="button" :class="{gray:!checked}" @click="submit" value="立即注册" :disabled="!checked" />
       </div>
     </form>
   </div>
@@ -137,10 +137,13 @@
           overflow:hidden;
           text-align:center;
           line-height:10px;
-          background-color:#fff;
           background-color:#008842;
           color:#fff;
           outline:none;
+        }
+        .gray{
+          background-color:#3333;
+          border:none;
         }
       }
     }

@@ -67,12 +67,12 @@
 					border:1px solid #3333;
 				}
 				.box{
-					// border:1px solid red;
-					// position:fixed;
-					// bottom:60px;
-					// left:0;
-					// width:100%;
-					// height:50%;
+					border:1px solid red;
+					position:fixed;
+					bottom:60px;
+					left:0;
+					width:100%;
+					height:50%;
 				}
 			}
 		}
