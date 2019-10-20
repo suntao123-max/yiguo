@@ -33,8 +33,8 @@
 				<p>
 					<span>配送说明</span>
 					<i class="el-icon-arrow-right"></i>
-			</p>
-		</router-link>
+				</p>
+			</router-link>
 			<router-link to="/serviceAgreement">
 				<p class="special">
 					<span>退换货说明</span>
@@ -42,12 +42,40 @@
 				</p>
 			</router-link>
 		</div>
+		<div class="box" v-if='user != ""'>
+			<input type="button" @click="secede" value="退出登录">
+		</div>
 	</div>
 </template>
 
 <script>
 	export default{
-	
+		data(){
+			return{
+				user:''
+			}
+		},
+		methods:{
+			secede:function(){
+				sessionStorage.removeItem('user')
+			}
+		},
+		mounted:function(){
+			let user = sessionStorage.getItem('user')
+			if(user == null){
+				this.user = ''
+			}else{
+				this.user = user
+			}
+		},
+		updated:function(){
+			let user = sessionStorage.getItem('user')
+			if(user == null){
+				this.user = ''
+			}else{
+				this.user = user
+			}
+		}
 	}
 </script>
 
@@ -91,6 +119,19 @@
 					right:1rem;
 					top:1rem;
 				}
+			}
+		}
+		.box{
+			width:100%;
+			text-align:center;
+			input{
+				margin-top:40px;
+				color:#008842;
+				border:1px solid currentColor;
+				background-color:#fff;
+				width:120px;
+				height:40px;
+				border-radius:5px;
 			}
 		}
 	}

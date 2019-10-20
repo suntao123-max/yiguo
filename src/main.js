@@ -7,7 +7,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import router from './router'
 import VueLazyload from 'vue-lazyload'
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
 
+Vue.use(iView);
 Vue.use(ElementUI)
 Vue.use(Vuelidate)
 Vue.use(VueLazyload)

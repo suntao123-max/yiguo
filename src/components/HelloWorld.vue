@@ -10,7 +10,7 @@
             <el-row :gutter="24">
               <el-col :span="6">
                 <div @click="address" class="grid-content bg-purple">
-                    北京
+                    <span v-text="Address"></span>
                 <i class="el-icon-arrow-down"></i>
               </div></el-col>
               <el-col :span="18"><div class="grid-content bg-purple">
@@ -178,6 +178,7 @@
     export default {
       data(){
         return{
+            Address:'北京市',
             item:[
                 {id:'1',src:'/static/images/home/1.png',name:'买二付一'},
                 {id:'2',src:'/static/images/home/2.png',name:'原箱佳沛'},
@@ -267,7 +268,10 @@
                     localStorage.setItem('id',JSON.stringify(arr))
                }
             }
-          }
+          },
+          mounted:function(){
+            this.Address = localStorage.getItem('address')
+          },
       }
 </script>
 
@@ -353,7 +357,7 @@
         overflow-y:hidden;
     }
     .flex li {
-        height:160px;
+        height:166px;
         width:120px;
         border:1px solid #3331;
         margin:5px;
@@ -373,7 +377,7 @@
         border-bottom-right-radius:.6rem;
     }
     .flex div{
-        margin:.2rem 0;
+        margin:.1rem 0;
         width:7rem;
         white-space:nowrap;
         overflow:hidden;
@@ -383,6 +387,7 @@
         color:red;
     }
     .flex1{
+
         display:flex;
         justify-content:space-between;
     }

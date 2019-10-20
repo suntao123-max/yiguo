@@ -3,8 +3,9 @@
 		<div class="notlogin">
 			<div class="login" v-if='user==""'>
 				登陆可同步购物车内商品
-				<router-link tag="button" to="">登陆</router-link>
+				<router-link tag="button" to="/login">登陆</router-link>
 			</div>
+			<div class="login" v-if='user!=""'>已登录，数据已同步</div>
 			<div class="post">全场满一百包邮，还差<span v-text="postal"></span>元包邮</div>
 		</div>
 		<ul class="car">
@@ -86,6 +87,12 @@
 				if(item[i].isCheck){
 					this.arr.push(item[i])
 				}
+			}
+			let user = sessionStorage.getItem('user')
+			if(user == null){
+				this.user = ''
+			}else{
+				this.user = user
 			}
 		},
 		updated:function(){

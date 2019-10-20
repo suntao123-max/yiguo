@@ -52,7 +52,7 @@
 	    						if(this.code=='1234'){
 	    							alert("登录成功,为您跳转首页")
 	    							sessionStorage.setItem("user",this.userName)
-	    							window.location.href = '/'
+	    							window.location.href = '/#/'
 	    						}else{
 	    							alert("验证码错误")
 	    						}

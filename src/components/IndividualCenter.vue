@@ -3,12 +3,16 @@
 		<header>
 			<div class="bgc">
 				<router-link to="/set"><i class="el-icon-setting"></i></router-link>
-				<router-link to="/login">
+				<router-link to="/login" v-if='user == ""'>
 					<span>
 						<img src="/static/images/user/no-pic.jpg" alt="">
 					</span>
 					<div>登录/注册</div>
 				</router-link>
+					<span v-if='user != ""'>
+						<img src="/static/images/user/no-pic.jpg" alt="">
+					</span>
+					<div v-if='user != ""' style="font-size:16px;">欢迎,{{user}}</div>
 			</div>
 			<div class="coin">
 				<div>
@@ -57,6 +61,7 @@
 	export default{
 		data(){
 			return {
+				user:'',
 				items:[
 					{src:'/static/images/user/coupons.png',name:'优惠券'},
 					{src:'/static/images/user/yellowcard.png',name:'充值卡'},
@@ -67,6 +72,22 @@
 					{src:'/static/images/user/account-icon.png',name:'账户余额'},
 					{src:'/static/images/user/service.png',name:'在线客服'}
 				]
+			}
+		},
+		mounted:function(){
+			let user = sessionStorage.getItem('user')
+			if(user == null){
+				this.user = ''
+			}else{
+				this.user = user
+			}
+		},
+		updated:function(){
+			let user = sessionStorage.getItem('user')
+			if(user == null){
+				this.user = ''
+			}else{
+				this.user = user
 			}
 		}
 	}
